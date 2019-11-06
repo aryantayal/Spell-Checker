@@ -28,16 +28,19 @@ public class Proj6 {
                 }
                 System.out.println("(" + (count + 1) + ")" + "Ignore word");
                 System.out.println("(" + (count + 2) + ")" + "Add to dictionary");
+                System.out.print("Enter the line of the number of correction: ");
                 int choice = s.nextInt();
                 if(choice <= count){
                     words[i] = (String) correction.elemAt(choice);
                 }
+                if(choice == count +1){
+                    continue;
+                }
                 if(choice == count + 2){
                     spelling.addToArray(words[i]);
                 }
-
-            }
-        }
+            } // end else
+        } // end for loop
 
     }
 
