@@ -10,10 +10,10 @@ public class Proj6 {
         String[] words=sentence.split(" ");
 
         int i = 0;
+        String fileName = "lexicon.txt";
+        SpellChecker spelling = new SpellChecker(fileName);
 
-        SpellChecker spelling = new SpellChecker(args[0]);
-
-        for(int i = 0; i < words.length; i++){
+        for(i = 0; i < words.length; i++){
             if(spelling.findCorrections(words[i]) == null){
                 continue;
             }
@@ -28,8 +28,13 @@ public class Proj6 {
                 }
                 System.out.println("(" + (count + 1) + ")" + "Ignore word");
                 System.out.println("(" + (count + 2) + ")" + "Add to dictionary");
-                int choice =
-                if()
+                int choice = s.nextInt();
+                if(choice <= count){
+                    words[i] = (String) correction.elemAt(choice);
+                }
+                if(choice == count + 2){
+                    spelling.addToArray(words[i]);
+                }
 
             }
         }

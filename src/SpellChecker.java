@@ -60,5 +60,7 @@ public class SpellChecker {
         }
         return correct;
         }
-
+        public void addToArray (String newWord){
+            array.add(newWord);
+        }
 }
