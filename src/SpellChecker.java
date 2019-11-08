@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 public class SpellChecker {
@@ -25,14 +24,26 @@ public class SpellChecker {
 
         int[][] d = new int[n+1][m+1];
 
+        for (int i = 0; i <= str1.length(); i++) {
+            d[i][0] = i;
+        }
+        //initializing the columns
+        for (int j = 0; j <= str2.length(); j++) {
+            d[0][j] = j;
+        }
+
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <=m; j++) {
-                if (str1.charAt(i-1) == str2.charAt(j-1)) {
+                if (Character.toLowerCase(str1.charAt(i-1)) == Character.toLowerCase(str2.charAt(j-1))) {
                     cost = 0;
                 } else {
                     cost = 1;
                 }
-                min = d[i][j - 1] + 1;
+                if (d[i][j-1] == 0) {
+                    min = 1;
+                } else {
+                    min = d[i][j - 1] + 1;
+                }
                 if (d[i - 1][j] + 1 < min) {
                     min = d[i - 1][j] + 1;
                 }
@@ -55,15 +66,23 @@ public class SpellChecker {
                 return null;
             }
             else{
-               distance =  distance(word, (String) array.elemAt(i));
-               if(distance <(1+ word.length()/5)){
-                   correct.add(array.elemAt(i));
-               }
+                distance =  distance(word, (String) array.elemAt(i));
+                if(distance <=(1+ word.length()/5)){
+                    correct.add(array.elemAt(i));
+                }
             }
         }
         return correct;
+    }
+    public void addToArray (String newWord){
+        array.add(newWord);
+    }
+
+    public void printFile( String fileName) throws IOException {
+        PrintWriter pw = new PrintWriter(new FileWriter(fileName));
+        for(int i = 0; i <array.size(); i++){
+            pw.println(array.elemAt(i));
         }
-        public void addToArray (String newWord){
-            array.add(newWord);
-        }
+        pw.close();
+    }
 }

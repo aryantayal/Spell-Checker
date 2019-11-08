@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class ResizeableArray {
     private Object[] nums;
     private int count;
@@ -12,13 +10,12 @@ public class ResizeableArray {
     public void add(Object x) {
         //resize
         if (count == nums.length) {
-            Object[] temp = new Object[nums.length*2];
+            Object[] temp = new Object[nums.length * 2];
             for (int i = 0; i < count; i++) {
                 temp[i] = nums[i];
             }
             nums = temp;
         }
-
         nums[count] = x;
         count++;
     }
