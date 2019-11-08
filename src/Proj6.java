@@ -18,12 +18,12 @@ public class Proj6 {
                 continue;
             }
             else{
-                System.out.println("I dont have an entry for" + words[i]);
+                System.out.println("I dont have an entry for " + words[i]);
                 System.out.println("Did you mean any of these words?\n");
-                int count =0;
+                int count =1;
                 ResizeableArray correction = spelling.findCorrections(words[i]);
-                for(count = 0; count < correction.size(); count ++  ){
-                    System.out.println("(" + count + ")" + words[i]);
+                for(count = 1; count < correction.size(); count ++  ){
+                    System.out.println("(" + count + ")" + correction.elemAt(count));
 
                 }
                 System.out.println("(" + (count + 1) + ")" + "Ignore word");
@@ -32,6 +32,7 @@ public class Proj6 {
                 int choice = s.nextInt();
                 if(choice <= count){
                     words[i] = (String) correction.elemAt(choice);
+                    System.out.println(words[i]);
                 }
                 if(choice == count +1){
                     continue;
@@ -41,7 +42,10 @@ public class Proj6 {
                 }
             } // end else
         } // end for loop
-
+        System.out.println("Spelled Checked: ");
+        for(int j = 0; j < words.length; j++){
+            System.out.print(words[j] + " ");
+        }
     }
 
 

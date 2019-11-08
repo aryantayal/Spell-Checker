@@ -20,11 +20,14 @@ public class SpellChecker {
 
     public int distance (String str1, String str2) {
         int distance, cost, min = 0;
-        int[][] d = new int[str1.length()][str2.length()];
+        int n = str1.length();
+        int m = str2.length();
 
-        for (int i = 1; i < str1.length(); i++) {
-            for (int j = 1; j < str2.length(); j++) {
-                if (str1.charAt(i) == str2.charAt(j)) {
+        int[][] d = new int[n+1][m+1];
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <=m; j++) {
+                if (str1.charAt(i-1) == str2.charAt(j-1)) {
                     cost = 0;
                 } else {
                     cost = 1;
@@ -39,9 +42,9 @@ public class SpellChecker {
                 d[i][j] = min;
             }
         }
-        distance = d[str1.length() - 1][str2.length() - 1];
 
-        return distance;
+
+        return d[n][m];
     }
     public ResizeableArray findCorrections (String word){
         ResizeableArray correct = new ResizeableArray();
