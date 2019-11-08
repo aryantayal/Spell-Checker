@@ -1,10 +1,20 @@
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * This class has all the formulas for the spell checker part and the print file section
+ * <p>
+ * Aryan Tayal
+ * SpellChecker
+ */
 public class SpellChecker {
     private ResizeableArray array;
     Scanner s = new Scanner(System.in);
 
+    /**
+     * @param fileName - file name of the dictionary
+     * @throws FileNotFoundException
+     */
     public SpellChecker(String fileName) throws FileNotFoundException {
 
         array = new ResizeableArray();
@@ -17,12 +27,17 @@ public class SpellChecker {
         inFile.close();
     }
 
-    public int distance (String str1, String str2) {
+    /**
+     * @param str1 - word 1
+     * @param str2 - word 2
+     * @return the distance - int
+     */
+    public int distance(String str1, String str2) {
         int distance, cost, min = 0;
         int n = str1.length();
         int m = str2.length();
 
-        int[][] d = new int[n+1][m+1];
+        int[][] d = new int[n + 1][m + 1];
 
         for (int i = 0; i <= str1.length(); i++) {
             d[i][0] = i;
@@ -33,13 +48,13 @@ public class SpellChecker {
         }
 
         for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <=m; j++) {
-                if (Character.toLowerCase(str1.charAt(i-1)) == Character.toLowerCase(str2.charAt(j-1))) {
+            for (int j = 1; j <= m; j++) {
+                if (Character.toLowerCase(str1.charAt(i - 1)) == Character.toLowerCase(str2.charAt(j - 1))) {
                     cost = 0;
                 } else {
                     cost = 1;
                 }
-                if (d[i][j-1] == 0) {
+                if (d[i][j - 1] == 0) {
                     min = 1;
                 } else {
                     min = d[i][j - 1] + 1;
@@ -57,35 +72,40 @@ public class SpellChecker {
 
         return d[n][m];
     }
-    public ResizeableArray findCorrections (String word){
+
+    /**
+     * @param word - inputs the word from the sentence
+     * @return - returns the array with the suggestions
+     */
+    public ResizeableArray findCorrections(String word) {
         ResizeableArray correct = new ResizeableArray();
 
-        for(int i = 0; i < array.size(); i++){
+        for (int i = 0; i < array.size(); i++) {
             int distance;
-            if(word.equals(array.elemAt(i))){
+            if (word.equals(array.elemAt(i))) {
                 return null;
-            }
-            else{
-                distance =  distance(word, (String) array.elemAt(i));
-                if(distance <=(1+ word.length()/5)){
+            } else {
+                distance = distance(word, (String) array.elemAt(i));
+                if (distance <= (1 + word.length() / 5)) {
                     correct.add(array.elemAt(i));
                 }
             }
         }
         return correct;
     }
-    public void addToArray (String newWord){
+
+    public void addToArray(String newWord) {
         array.add(newWord);
     }
 
     /**
-     *
-     * @param fileName
+     * @param fileName - file name for the output file
      * @throws IOException
      */
-    public void printFile( String fileName) throws IOException {
+
+    public void printFile(String fileName) throws IOException {
         PrintWriter pw = new PrintWriter(new FileWriter(fileName));
-        for(int i = 0; i <array.size(); i++){
+        for (int i = 0; i < array.size(); i++) {
             pw.println(array.elemAt(i));
         }
         pw.close();

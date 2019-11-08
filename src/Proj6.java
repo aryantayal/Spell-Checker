@@ -1,7 +1,15 @@
 import java.io.IOException;
 import java.util.Scanner;
-
+/**
+ * This main method runs the other classes
+ * This program Checks the spelling for the sentence that is imputed and will keep running until its done.
+ *
+ * Aryan Tayal
+ * Proj6
+ * Thursday 2:30
+ */
 public class Proj6 {
+
     public static void main(String[] args) throws IOException {
         Scanner s = new Scanner(System.in);
         boolean again = true;
@@ -18,8 +26,6 @@ public class Proj6 {
             String[] words = sentence.split(" ");
 
             int i = 0;
-            // String fileName = "lexicon.txt";
-
 
             for (i = 0; i < words.length; i++) {
                 if (spelling.findCorrections(words[i]) == null) {
@@ -53,7 +59,6 @@ public class Proj6 {
 
                 System.out.print(words[j] + " ");
             }
-            String sentence1 = s.nextLine();
 
         }while(again);
 
