@@ -28,18 +28,6 @@ public class ResizeableArray {
         return nums[pos];
     }
 
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < count; i++) {
-            result.append(nums[i].toString() + "\n");
-        }
-        return result.toString();
-    }
 
-    public void print() {
-        for (int i = 0; i < count; i++) {
-            System.out.println(nums[i]);
-        }
-    }
 
 }

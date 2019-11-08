@@ -78,6 +78,11 @@ public class SpellChecker {
         array.add(newWord);
     }
 
+    /**
+     *
+     * @param fileName
+     * @throws IOException
+     */
     public void printFile( String fileName) throws IOException {
         PrintWriter pw = new PrintWriter(new FileWriter(fileName));
         for(int i = 0; i <array.size(); i++){

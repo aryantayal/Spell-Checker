@@ -1,18 +1,25 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Proj6 {
     public static void main(String[] args) throws IOException {
         Scanner s = new Scanner(System.in);
-        System.out.print("Enter a sentence (press enter to quit): ");
-        String sentence = s.nextLine();
+        boolean again = true;
+        SpellChecker spelling = new SpellChecker(args[0]);
 
+        do {
+            System.out.print("\nEnter a sentence (press enter to quit): ");
+
+            String sentence = s.nextLine();
+            if (sentence.equals("")) {
+
+                break;
+            }
             String[] words = sentence.split(" ");
 
             int i = 0;
             // String fileName = "lexicon.txt";
-            SpellChecker spelling = new SpellChecker(args[0]);
+
 
             for (i = 0; i < words.length; i++) {
                 if (spelling.findCorrections(words[i]) == null) {
@@ -32,7 +39,6 @@ public class Proj6 {
                     int choice = s.nextInt();
                     if (choice <= count) {
                         words[i] = (String) correction.elemAt(choice - 1);
-                        System.out.println(words[i]);
                     }
                     if (choice == count + 1) {
                         continue;
@@ -42,13 +48,20 @@ public class Proj6 {
                     }
                 } // end else
             } // end for loop
-            spelling.printFile(args[0]);
             System.out.println("Spelled Checked: ");
             for (int j = 0; j < words.length; j++) {
 
                 System.out.print(words[j] + " ");
             }
+            String sentence1 = s.nextLine();
 
+        }while(again);
+
+        System.out.println("Do you want to update file " + args[0] + " to add your new words (y/n)?");
+        char update = s.next().charAt(0);
+        if(update == 'y' || update == 'Y'){
+            spelling.printFile(args[0]);
         }
+    }
 
 }
